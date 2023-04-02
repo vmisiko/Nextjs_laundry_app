@@ -20,6 +20,8 @@ module.exports = {
       blue: colors.blue,
       black: colors.black,
       gray: colors.gray,
+      "dark-line": "#393C49",
+      formBg: "#2D303E",
       primaryText: ({ opacityVariable, opacityValue }) => {
         if (opacityValue !== undefined) {
           return `rgba(var(--primary-text), ${opacityValue})`;
@@ -84,6 +86,8 @@ module.exports = {
         }
         return 'rgba(var(--tertiary), 1)';
       },
+      lighter: '#E0E6E9',
+      light: '#ABBBC2',
     },
     extend: {},
   },

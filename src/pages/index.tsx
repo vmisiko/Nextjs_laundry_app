@@ -2,8 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Layout from '@/presentation/layouts/MainLayout'
-import { ReactNode } from 'react'
-const inter = Inter({ subsets: ['latin'] })
+import NewOrder from '@/presentation/modules/new-order'
 
 function Home() {
   return (
@@ -14,8 +13,8 @@ function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
-
+      <main className="h-screen">
+        <NewOrder />
       </main>
     </>
   )

@@ -4,7 +4,7 @@ import SideBar from "../components/shared/SideBar"
 export default function Layout({ children }: {children: JSX.Element}) {
   return (
     <div
-      className={`grid min-h-screen grid-cols-[auto_1fr] justify-center overflow-hidden`}
+      className={`grid min-h-screen grid-cols-[auto_1fr] justify-center overflow-hidden text-white`}
     >
       <div className="flex h-[calc(100vh_-_2rem)] flex-col items-center justify-between bg-slate-500">
         <SideBar/>
