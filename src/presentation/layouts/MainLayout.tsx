@@ -6,7 +6,7 @@ export default function Layout({ children }: {children: JSX.Element}) {
     <div
       className={`grid min-h-screen grid-cols-[auto_1fr] justify-center overflow-hidden text-white`}
     >
-      <div className="flex h-[calc(100vh_-_2rem)] flex-col items-center justify-between bg-slate-500">
+      <div className="flex h-screen flex-col items-center justify-between bg-slate-500">
         <SideBar/>
       </div>
       <div className="h-screen w-full overflow-y-scroll">

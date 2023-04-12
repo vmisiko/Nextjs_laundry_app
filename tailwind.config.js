@@ -22,6 +22,7 @@ module.exports = {
       gray: colors.gray,
       "dark-line": "#393C49",
       formBg: "#2D303E",
+      "light-text": "#ABBBC2",
       primaryText: ({ opacityVariable, opacityValue }) => {
         if (opacityValue !== undefined) {
           return `rgba(var(--primary-text), ${opacityValue})`;
