@@ -2,7 +2,7 @@ import TextInput from "@/presentation/components/TextInput";
 import { useEffect, useState } from "react";
 import Category from "@/domain/entities/new-order/category";
 import ProductCard from "@/presentation/modules/new-order/components/ProductCard";
-import Product from "@/domain/entities/new-order/product";
+import Product, { ProductImp } from "@/domain/entities/new-order/product";
 import Image from "next/image";
 import Cart from "./components/cart";
 
@@ -93,9 +93,8 @@ const NewOrder = () => {
             expressPrice: 300,
             categoryId: 3,
           },
-
-        ]);
-    }, [categories]);
+        ].map((product: Product) => new ProductImp(product)));
+    }, [categories, products, activeTabID]);
 
     const handleTabChange = (tabId: number) => {
         setActivetTabId(tabId);
@@ -146,7 +145,7 @@ const NewOrder = () => {
                   {/* products */}
             </div>
             {/* cart component  */}
-            <div className="col-span-1 bg-secondaryBg h-screen w-full p-4">
+            <div className="col-span-1 bg-secondaryBg w-full p-4  pb-14">
               <Cart />
             </div>
             {/* cart component  */}
