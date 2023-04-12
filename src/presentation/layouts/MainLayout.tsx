@@ -9,8 +9,8 @@ export default function Layout({ children }: {children: JSX.Element}) {
       <div className="flex h-screen flex-col items-center justify-between bg-slate-500">
         <SideBar/>
       </div>
-      <div className="h-screen w-full overflow-y-scroll">
-        <main className="min-h-screen w-full bg-primaryBg">
+      <div className="h-screen w-full overflow-y-scroll bg-primaryBg">
+        <main className="m-h-screen w-full">
           {children}
         </main>
       </div>

@@ -101,7 +101,8 @@ const NewOrder = () => {
     
     return (
         <div className="grid grid-cols-4">
-            <div className="col-span-3 h-full m-4">
+
+            <div className="col-span-3 h-screen m-4">
                 <header className="flex justify-between">
                   <div>
                       <h1 className="text-xl">Laundry App</h1>
@@ -132,6 +133,7 @@ const NewOrder = () => {
                 </div>
                 {/* category  */}
 
+                {/* {products} */}
                 <div className="mt-5 grid grid-cols-1 gap-10 md:grid-cols-3">
                   {
                     products && products.map((product: Product, index: number) => (                         
@@ -139,11 +141,26 @@ const NewOrder = () => {
                     ))
                   }
                 </div>
+                  {/* products */}
+            </div>
+            {/* cart component  */}
+            <div className="col-span-1 bg-secondaryBg h-screen w-full p-4">
+              <section className="flex space-x-2 mt-5 w-full justify-between">
+                <TextInput
+                  name="Search Customer" 
+                  label="search Product" 
+                  onChange={(e) => setValue(e.target.value)} 
+                  value={value}
+                  placeholder="Search"
+                  type="text"
+                />
+
+                <button className="rounded-lg h-12 border border-accent px-4 mt-3"> + </button>
+              </section>
+             
 
             </div>
-            <div className="bg-secondaryBg h-screen w-full">
-
-            </div>
+            {/* cart component  */}
         </div>
     )
 }

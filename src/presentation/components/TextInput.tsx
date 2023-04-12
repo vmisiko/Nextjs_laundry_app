@@ -37,7 +37,7 @@ const TextInput = (props: InputTextProps) => {
           type="search" 
           id="search" 
           value={value}
-          className="mt-3 h-10 w-full p-4 pl-10 text-sm text-white border border-dark-line rounded-lg bg-formBg  focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" 
+          className="mt-3 h-12 w-full p-4 pl-10 text-sm text-white border border-dark-line rounded-lg bg-formBg  focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" 
           placeholder={placeholder} 
           required 
         />
