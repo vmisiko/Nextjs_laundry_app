@@ -5,7 +5,7 @@ import Image from "next/image";
 const ProductCard = ({product}:{product: Product}) => {
 
   return (
-    <div className="bg-secondaryBg rounded-lg shadow-lg h-68 w-48 p-5">
+    <div className="bg-secondaryBg rounded-lg shadow-lg h-68 w-48 p-5 cursor-pointer">
       <Image height="180" src={require('../../../../assets/shirt.png')} alt='shirt'></Image>
 
       <div className="text-center mt-1">

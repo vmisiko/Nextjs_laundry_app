@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Category from "@/domain/entities/new-order/category";
 import ProductCard from "@/presentation/modules/new-order/components/ProductCard";
 import Product from "@/domain/entities/new-order/product";
+import Image from "next/image";
+import Cart from "./components/cart";
 
 const NewOrder = () => {
 
@@ -145,20 +147,7 @@ const NewOrder = () => {
             </div>
             {/* cart component  */}
             <div className="col-span-1 bg-secondaryBg h-screen w-full p-4">
-              <section className="flex space-x-2 mt-5 w-full justify-between">
-                <TextInput
-                  name="Search Customer" 
-                  label="search Product" 
-                  onChange={(e) => setValue(e.target.value)} 
-                  value={value}
-                  placeholder="Search"
-                  type="text"
-                />
-
-                <button className="rounded-lg h-12 border border-accent px-4 mt-3"> + </button>
-              </section>
-             
-
+              <Cart />
             </div>
             {/* cart component  */}
         </div>
