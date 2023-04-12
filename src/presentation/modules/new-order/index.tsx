@@ -1,13 +1,41 @@
 import TextInput from "@/presentation/components/TextInput";
 import { useEffect, useState } from "react";
+import Category from "@/domain/entities/new-order/category";
 
 const NewOrder = () => {
 
     const [time, setTime] = useState<string>();
 		const [value, setValue] = useState<string>();
+		const [categories, setCategories] = useState<Category[]>();
+		const [activeTabID, setActivetTabId] = useState<number>();
+
     useEffect(() => {
         setTime(new Date().toDateString());
-    },[])
+		setCategories([
+			{	id: 1,
+				name: "Wash $ fold",
+			},
+			{	id: 2,
+				name: "Beddings",
+			},
+			{	id: 3,
+				name: "Dry Cleaning",
+			},
+			{	id: 4,
+				name: "Ironing",
+			},
+			{	id: 5,
+				name: "Others",
+			}
+		]);
+		setActivetTabId(categories && categories[0]?.id);
+    },[]);
+
+	const handleTabChange = (tabId: number) => {
+		setActivetTabId(tabId);
+	};
+	
+
 
     return (
         <div className="grid grid-cols-4">
@@ -32,28 +60,14 @@ const NewOrder = () => {
 							{/* category */}
 							<div className="mt-10">
 								<div className="flex justify-between border-b border-gray-600 -mb-px">
-									<div className="inline-block p-4 text-accent border-b-2 border-accent rounded-t-lg active dark:text-accent dark:border-accent">
-										<span className=""> Wash $ fold</span>
-									</div>
+									{
+										categories && categories.map((category: Category) => 
+										<div onClick={() => handleTabChange(category.id)} className={`inline-block p-4  rounded-t-lg active dark:text-accent dark:border-accent hover:text-accent hover:border-accent ${ activeTabID === category.id && 'border-accent border-b-2 text-accent'}`}>
+											<span className=""> {category.name}</span>
+										</div>
+									)}
+									<div className="">
 
-									<div className="inline-block cursor-pointer p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-										<span className="text-white"> Beddings</span>
-									</div>
-
-									<div className="inline-block cursor-pointer p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-										<span className="text-white"> Ironing</span>
-									</div>
-
-									<div className=" inline-block cursor-pointer p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ">
-										<span className="text-white"> Dry Cleaning</span>
-									</div>
-
-									<div className="inline-block cursor-pointer p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-										<span className="text-white"> Shoes</span>
-									</div>
-									
-									<div className="inline-block cursor-pointer p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ">
-										<span className="text-white"> others</span>
 									</div>
 								</div>
 							</div>
