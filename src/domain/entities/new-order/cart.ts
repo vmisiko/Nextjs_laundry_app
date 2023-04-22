@@ -43,7 +43,7 @@ export class Cart implements Icart {
     return this.cartItems.reduce(sum, 0);
   }
 
-  public add(product: Product, quantity: number): Cart {
+  public add(product: Product, quantity: number) {
     const index = this.cartItems.findIndex((p) => p.product.id === product.id);
     if (index > -1) {
       const cartItem = new CartItem(this.cartItems[index].product);

@@ -3,6 +3,7 @@ import Product from "@/domain/entities/new-order/product";
 import TextInput from "@/presentation/components/TextInput";
 import CartItem from "./CartItem";
 import { Cart as CartEntity,CartItem as CartItemEntity, Icart } from "@/domain/entities/new-order/cart";
+import { useCartBloc } from "@/pages/_app";
 
 
 const Cart = () => {
@@ -32,16 +33,17 @@ const Cart = () => {
 			categoryId: 3,
 		},
 	].map((product: Product) => new CartItemEntity(product))
-	
-		const [value, setValue] = useState<string>();
-		const [products, setProducts] = useState<CartItemEntity[]>(productSet);
-        const [carts, setCarts] = useState<CartEntity>();
+    
+    const ploc = useCartBloc();
+    const [value, setValue] = useState<string>();
+    const [products, setProducts] = useState<CartItemEntity[]>(productSet);
+    const [carts, setCarts] = useState<CartEntity>();
 
-		useEffect(() => {
-			if (!carts) {
-				setCarts(new CartEntity(products));
-			}
-		}, [carts]);
+    useEffect(() => {
+        if (!carts) {
+            setCarts(new CartEntity(products));
+        }
+    }, [carts]);
 
     return (
       <div className="relative h-screen">

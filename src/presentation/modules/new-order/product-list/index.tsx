@@ -3,13 +3,17 @@ import Category from "@/domain/entities/new-order/category";
 import ProductCard from "@/presentation/modules/new-order/components/ProductCard";
 import Product from "@/domain/entities/new-order/product";
 import TextInput from "@/presentation/components/TextInput";
+import { dependenciesLocator } from "@/core/dependencies";
+import { useBlocState } from "@/core/useBlocState";
+import { useSelector } from "react-redux";
 
 const ProductList = () => {
 	const [time, setTime] = useState<string>();
 	const [value, setValue] = useState<string>();
 	const [categories, setCategories] = useState<Category[]>();
 	const [activeTabID, setActivetTabId] = useState<number>();
-	const [products, setProducts] = useState<Product[]>();
+    const ploc = dependenciesLocator.provideProductsPloc();
+    const state = useBlocState(ploc);
 
 	useEffect(() => {
 		setTime(new Date().toDateString());
@@ -33,77 +37,15 @@ const ProductList = () => {
 		if (!activeTabID)  {
 			setActivetTabId(categories && categories[0]?.id);
 		}
-		setProducts([
-				{
-						id: 1,
-						name: 'Shirt',
-						image: "shirt.png",
-						price: 100,
-						expressPrice: 150,
-						categoryId: 1,
-				},
-				{
-						id: 2,
-						name: 'T-Shirt',
-						image: "shirt.png",
-						price: 100,
-						expressPrice: 150,
-						categoryId: 2,
-				},
-				{
-						id: 3,
-						name: 'Blouse',
-						image: "shirt.png",
-						price: 100,
-						expressPrice: 150,
-						categoryId: 3,
-				},
-				{
-						id: 4,
-						name: 'Skirt',
-						image: "shirt.png",
-						price: 100,
-						expressPrice: 150,
-						categoryId: 3,
-				},
-				{
-						id: 5,
-						name: 'Trouser',
-						image: "shirt.png",
-						price: 100,
-						expressPrice: 150,
-						categoryId: 3,
-				},
-				{
-						id: 6,
-						name: 'Duvet Large',
-						image: "shirt.png",
-						price: 800,
-						expressPrice: 1000,
-						categoryId: 3,
-				},
-				{
-						id: 7,
-						name: 'Duvet small',
-						image: "shirt.png",
-						price: 500,
-						expressPrice: 300,
-						categoryId: 3,
-				},
-				{
-						id: 8,
-						name: 'Duvet Medium',
-						image: "shirt.png",
-						price: 600,
-						expressPrice: 300,
-						categoryId: 3,
-				},
-			]);
-		
 	}, [activeTabID]);
 
+    useEffect(()=> {
+        ploc.getProducts(``);
+        console.log(state);
+    },[activeTabID, state]);
+
 	const handleTabChange = (tabId: number) => {
-			setActivetTabId(tabId);
+	    setActivetTabId(tabId);
 	};
 
   return (
@@ -141,7 +83,7 @@ const ProductList = () => {
 				{/* {products} */}
 				<div className="mt-5 grid grid-cols-1 gap-10 md:grid-cols-3">
 					{
-						products && products.map((product: Product) => (                         
+						state.products && state.products.map((product: Product) => (                         
 							<ProductCard product={product} key={product.id}/>
 						))
 					}
