@@ -41,7 +41,6 @@ const ProductList = () => {
 
     useEffect(()=> {
         ploc.getProducts(``);
-        console.log(state);
     },[activeTabID, state]);
 
 	const handleTabChange = (tabId: number) => {

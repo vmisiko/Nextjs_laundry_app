@@ -1,13 +1,13 @@
 import { Cart } from "@/domain/entities/new-order/cart";
 import { createSlice } from "@reduxjs/toolkit";
 export interface InitialState {
-  cart: Cart,
+  carts: Cart,
   loading: boolean,
   error: String,
 }
 
 export const initialState: InitialState =  {
-  cart: new Cart(),
+  carts: new Cart(),
   loading: false,
   error: "",
 };
@@ -16,10 +16,12 @@ const productReducer = createSlice({
   initialState,
   reducers: {
     cartLoaded: (state, action) => {
-      state.cart = action.payload;
+      state.carts = action.payload;
     },
     addToCart: (state, action) => {
-      state.cart.add(action.payload, 1);
+      const cart = state.carts.add(action.payload, 1);
+      console.log(cart);
+      state.carts = cart;
     },
     loadingCart: (state, action) =>{
       return {
@@ -33,13 +35,12 @@ const productReducer = createSlice({
         error: action.payload
       }
     }
-
   }
 });
 
 export default productReducer.reducer;
 
 export const { cartLoaded,loadingCart, errorNotif, addToCart } =  productReducer.actions;
-export const selectCart = (state: any) => state.cart; 
+export const selectCart = (state: any) => state.carts; 
 export const selectError = (state: any) => state.error;
 export const selectLoading = (state: any) => state.loading;

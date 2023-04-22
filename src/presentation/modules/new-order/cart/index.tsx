@@ -2,48 +2,22 @@ import { useEffect, useMemo, useState } from "react";
 import Product from "@/domain/entities/new-order/product";
 import TextInput from "@/presentation/components/TextInput";
 import CartItem from "./CartItem";
-import { Cart as CartEntity,CartItem as CartItemEntity, Icart } from "@/domain/entities/new-order/cart";
+import { Cart as CartEntity, CartItem as CartItemEntity } from "@/domain/entities/new-order/cart";
 import { useCartBloc } from "@/pages/_app";
+import { useBlocState } from "@/core/useBlocState";
+import { useSelector } from "react-redux";
+import { selectCart } from "@/presentation/bloc/new-order/cart/CartSlice";
 
 
 const Cart = () => {
-	const productSet = [
-		{
-			id: 1,
-			name: 'duvet',
-			image: "shirt.png",
-			price: 100,
-			expressPrice: 150,
-			categoryId: 1,
-		},
-		{
-			id: 2,
-			name: 'carpet',
-			image: "shirt.png",
-			price: 100,
-			expressPrice: 150,
-			categoryId: 2,
-		},
-		{
-			id: 3,
-			name: 'Blouse',
-			image: "shirt.png",
-			price: 100,
-			expressPrice: 150,
-			categoryId: 3,
-		},
-	].map((product: Product) => new CartItemEntity(product))
-    
     const ploc = useCartBloc();
+    const state = useBlocState(ploc);
     const [value, setValue] = useState<string>();
-    const [products, setProducts] = useState<CartItemEntity[]>(productSet);
-    const [carts, setCarts] = useState<CartEntity>();
-
+    const counter = useSelector(selectCart);
     useEffect(() => {
-        if (!carts) {
-            setCarts(new CartEntity(products));
-        }
-    }, [carts]);
+        ploc.getCart();
+        console.log(counter, "Counter");
+    }, [ploc, state, counter]);
 
     return (
       <div className="relative h-screen">
@@ -74,13 +48,13 @@ const Cart = () => {
 
 				<section>
 				{	
-					carts?.cartItems && carts?.cartItems.map((cartItem, index: number) => (
+					state.carts?.cartItems && state.carts?.cartItems.map((cartItem: CartItemEntity, index: number) => (
 						<CartItem 
 						cartItem={cartItem}
 						key={index}
-						removeItem={ () => setCarts(carts.remove(cartItem.product.id))}
-						addItem={(amount: number) =>setCarts(carts.add(cartItem.product, amount))}
-						setComment={(comment: string) => setCarts(carts.setItemComment(cartItem.product.id, comment))}
+						removeItem={ () => ploc.setCart(state.carts?.remove(cartItem.product.id))}
+						addItem={(amount: number) =>ploc.setCart(state.carts?.add(cartItem.product, amount))}
+						setComment={(comment: string) => ploc.setCart(state.carts?.setItemComment(cartItem.product.id, comment))}
 						/>
 					))
 				}
@@ -89,7 +63,7 @@ const Cart = () => {
 				<footer className="absolute w-full bottom-0 offset-y-0">
 					<section className="flex justify-between mt-10">
 						<span className="text-sm text-light-text">Sub Total</span>
-						<span> Ksh {carts?.totalPrice}</span>
+						<span> Ksh {state.carts?.totalPrice}</span>
 					</section>
 
 					<section className="mt-5">

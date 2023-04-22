@@ -55,9 +55,11 @@ export class Cart implements Icart {
       ];
       
       this.cartItems = cartItems;
+      console.log("added item ", this.cartItems);
     } else {
       this.cartItems = [...this.cartItems, { product, quantity}];
     }
+    console.log("added item ", this.cartItems);
     return  new Cart(this.cartItems);
 
   }
