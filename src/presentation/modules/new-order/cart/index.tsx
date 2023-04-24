@@ -42,8 +42,9 @@ const Cart = ({ploc}:{ploc: CartCubit}) => {
 				</section>
 
 				<section className="pb-10 mb-14">
-				{	
-					state.carts.cartItems && state.carts.cartItems.map((cartItem: CartItemEntity, index: number) => (
+                
+				{
+                    state.carts.cartItems.length ?  state.carts.cartItems.map((cartItem: CartItemEntity, index: number) => (
 						<CartItem 
 						cartItem={cartItem}
 						key={index}
@@ -51,8 +52,11 @@ const Cart = ({ploc}:{ploc: CartCubit}) => {
 						addItem={(amount: number) =>ploc.setCart(state.carts?.add(cartItem.product, amount))}
 						setComment={(comment: string) => ploc.setCart(state.carts?.setItemComment(cartItem.product.id, comment))}
 						/>
-					))
-				}
+					)) : 
+                    <div className="text-center text-light-text mt-14">
+                        <span> Add your cart items here</span>
+                    </div>
+                }
 				</section>
 
 				<footer className="absolute w-full bottom-0 offset-y-0 ">
