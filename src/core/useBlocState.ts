@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import Ploc from "./presentation/ploc";
 
 export const useBlocState = (bloc: Ploc) => {
-  const [state, setState] = useState(bloc.state);
-
+  const [state, setState] = useState<any>(bloc.state);
   useEffect(() => {
     setState(bloc.state);
-  }, [bloc]);
-
+    console.log(bloc.state, 'useBlocState');
+  }, [bloc.state])
   return state;
 }

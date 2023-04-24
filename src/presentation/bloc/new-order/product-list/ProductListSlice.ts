@@ -35,6 +35,6 @@ const cartReducer = createSlice({
 
 export default cartReducer.reducer;
 export const { loadProducts, errorNotif, loadingProducts } = cartReducer.actions
-export const selectProducts = (state: any) => state.products; 
+export const selectProductState = (state: any) => state.product; 
 export const selectError = (state: any) => state.error;
 export const selectLoading = (state: any) => state.loading;

@@ -11,8 +11,9 @@ export class CartItem implements ICartItem {
   product: Product;
   quantity: number = 1;
   comment: string = "";
-  constructor(product: Product) {
+  constructor({product, quantity}: {product:Product, quantity?: number},) {
     this.product = product;
+    this.quantity = quantity || 1;
   }
 
   get totalPrice() {
@@ -38,7 +39,7 @@ export class Cart implements Icart {
 
   get totalPrice(): number {
     const sum = (acc: number, cartItem: ICartItem) => {
-      return acc + cartItem.product.price * cartItem.quantity
+      return acc + cartItem.product?.price * cartItem.quantity
     }
     return this.cartItems.reduce(sum, 0);
   }
@@ -46,7 +47,7 @@ export class Cart implements Icart {
   public add(product: Product, quantity: number) {
     const index = this.cartItems.findIndex((p) => p.product.id === product.id);
     if (index > -1) {
-      const cartItem = new CartItem(this.cartItems[index].product);
+      const cartItem = new CartItem({product: this.cartItems[index].product, quantity: this.cartItems[index].quantity});
       cartItem.quantity = quantity || 1;
       const cartItems: ICartItem[] =  [
         ...this.cartItems.slice(0, index),
@@ -55,11 +56,30 @@ export class Cart implements Icart {
       ];
       
       this.cartItems = cartItems;
-      console.log("added item ", this.cartItems);
     } else {
       this.cartItems = [...this.cartItems, { product, quantity}];
     }
-    console.log("added item ", this.cartItems);
+    return  new Cart(this.cartItems);
+
+  }
+
+  public addCart(product: Product) {
+    const index = this.cartItems.findIndex((p) => p.product.id === product.id);
+    if (index > -1) {
+      (console.log('available'))
+      const cartItem = new CartItem({product: this.cartItems[index].product, quantity:this.cartItems[index].quantity} );
+      cartItem.quantity  = cartItem.quantity + 1
+
+      const cartItems: ICartItem[] =  [
+        ...this.cartItems.slice(0, index),
+        cartItem,
+        ...this.cartItems.slice(index + 1),
+      ];
+      
+      this.cartItems = cartItems;
+    } else {
+      this.cartItems = [...this.cartItems, { product, quantity: 1}];
+    }
     return  new Cart(this.cartItems);
 
   }
@@ -81,7 +101,7 @@ export class Cart implements Icart {
     const index = this.cartItems.findIndex((p) => p.product.id === itemId);
 
     if (index > -1) {
-      const cartItem = new CartItem(this.cartItems[index].product);
+      const cartItem = new CartItem({product: this.cartItems[index].product, quantity: this.cartItems[index].quantity });
       cartItem.comment = comment;
       this.cartItems[index] = cartItem;
     }

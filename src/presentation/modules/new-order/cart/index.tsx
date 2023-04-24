@@ -1,34 +1,29 @@
 import { useEffect, useMemo, useState } from "react";
-import Product from "@/domain/entities/new-order/product";
 import TextInput from "@/presentation/components/TextInput";
 import CartItem from "./CartItem";
 import { Cart as CartEntity, CartItem as CartItemEntity } from "@/domain/entities/new-order/cart";
 import { useCartBloc } from "@/pages/_app";
 import { useBlocState } from "@/core/useBlocState";
 import { useSelector } from "react-redux";
-import { selectCart } from "@/presentation/bloc/new-order/cart/CartSlice";
+import { selectCartState } from "@/presentation/bloc/new-order/cart/CartSlice";
+import CartCubit from "@/presentation/bloc/new-order/cart/cartCubit";
 
 
-const Cart = () => {
-    const ploc = useCartBloc();
-    const state = useBlocState(ploc);
+const Cart = ({ploc}:{ploc: CartCubit}) => {
     const [value, setValue] = useState<string>();
-    const counter = useSelector(selectCart);
+    const state = useSelector(selectCartState);
     useEffect(() => {
-        ploc.getCart();
-        console.log(counter, "Counter");
-    }, [ploc, state, counter]);
-
+    }, [state]);
     return (
       <div className="relative h-screen">
 				<section className="flex mt-5 w-full justify-between">
 				<TextInput
-						name="Search Customer" 
-						label="search Product" 
-						onChange={(e) => setValue(e.target.value)} 
-						value={value}
-						placeholder="Search"
-						type="text"
+                name="Search Customer" 
+                label="search Product" 
+                onChange={(e) => setValue(e.target.value)} 
+                value={value}
+                placeholder="Search"
+                type="text"
 				/>
 
 				<button className="rounded-lg h-12 border border-accent px-4 mt-3"> + </button>
@@ -48,7 +43,7 @@ const Cart = () => {
 
 				<section>
 				{	
-					state.carts?.cartItems && state.carts?.cartItems.map((cartItem: CartItemEntity, index: number) => (
+					state.carts.cartItems && state.carts.cartItems.map((cartItem: CartItemEntity, index: number) => (
 						<CartItem 
 						cartItem={cartItem}
 						key={index}

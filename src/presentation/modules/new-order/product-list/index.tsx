@@ -4,8 +4,9 @@ import ProductCard from "@/presentation/modules/new-order/components/ProductCard
 import Product from "@/domain/entities/new-order/product";
 import TextInput from "@/presentation/components/TextInput";
 import { dependenciesLocator } from "@/core/dependencies";
-import { useBlocState } from "@/core/useBlocState";
 import { useSelector } from "react-redux";
+import { selectProductState } from "@/presentation/bloc/new-order/product-list/ProductListSlice";
+import { useBlocState } from "@/core/useBlocState";
 
 const ProductList = () => {
 	const [time, setTime] = useState<string>();
@@ -13,7 +14,7 @@ const ProductList = () => {
 	const [categories, setCategories] = useState<Category[]>();
 	const [activeTabID, setActivetTabId] = useState<number>();
     const ploc = dependenciesLocator.provideProductsPloc();
-    const state = useBlocState(ploc);
+    const state = useSelector(selectProductState);
 
 	useEffect(() => {
 		setTime(new Date().toDateString());
@@ -41,6 +42,7 @@ const ProductList = () => {
 
     useEffect(()=> {
         ploc.getProducts(``);
+        console.log(state);
     },[activeTabID, state]);
 
 	const handleTabChange = (tabId: number) => {

@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import store from '@/core/store';
 import { createContext } from '@/core/context';
 import CartCubit from '@/presentation/bloc/new-order/cart/cartCubit';
-import { useBlocState } from '@/core/useBlocState';
 import { dependenciesLocator } from '@/core/dependencies';
 
 const [blocContext, useBloc] = createContext<CartCubit>();

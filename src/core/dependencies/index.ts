@@ -1,5 +1,5 @@
 import CartCubit from "@/presentation/bloc/new-order/cart/cartCubit";
-import ProductCubit from "@/presentation/bloc/new-order/product-list.ts/productCubit";
+import ProductCubit from "@/presentation/bloc/new-order/product-list/productCubit";
 import store from "../store";
 import { GetProductsUseCase } from "@/domain/use-cases/new-order/GetProductsUseCase";
 import { ProductRepository } from "@/data/repository/new-order/ProductRepository";

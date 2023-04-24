@@ -1,5 +1,5 @@
 import Ploc from "@/core/presentation/ploc";
-import { ProductsState, loadProducts, loadingProducts } from "./ProductListSlice";
+import { loadProducts, loadingProducts } from "./ProductListSlice";
 import Product from "@/domain/entities/new-order/product";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { GetProductsUseCase } from "@/domain/use-cases/new-order/GetProductsUseCase";
@@ -16,16 +16,11 @@ class ProductCubit extends Ploc {
     super(store);
     this.getProductsUseCase = getProductsUseCase;
   }
-
-  get state(): any {
-    return super.state.product;
-  }
-
   setProducts(products: Array<Product>):void {
     this.store.dispatch(loadProducts(products));
   }
 
-  async getProducts(categoryId: string){
+  async getProducts(categoryId: string) {
     const products: Array<Product> = await this.getProductsUseCase.execute(categoryId);
     this.setProducts(products);
   }

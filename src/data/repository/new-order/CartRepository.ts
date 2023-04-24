@@ -26,7 +26,7 @@ const productSet = [
     expressPrice: 150,
     categoryId: 3,
   },
-].map((product: Product) => new CartItem(product));
+].map((product: Product) => new CartItem({product: product}));
 
 export class CartRepository implements ICartRepository {
   async get(): Promise<Cart> {

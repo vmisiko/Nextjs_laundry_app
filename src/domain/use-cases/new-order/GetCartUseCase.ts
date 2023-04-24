@@ -1,4 +1,4 @@
-import { Cart, CartItem } from "@/domain/entities/new-order/cart";
+import { Cart } from "@/domain/entities/new-order/cart";
 import { ICartRepository } from "@/domain/repository/new-order/ICartRepository";
 
 export class GetCartUseCase {

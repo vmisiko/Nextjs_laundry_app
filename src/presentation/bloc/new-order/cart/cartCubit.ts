@@ -17,16 +17,16 @@ class CartCubit extends Ploc {
     super(store);
     this.getCartUseCase = getCartUseCase;
   } 
-  get state(): any {
-    return super.state;
-  }
+  // public get state(): any {
+  //   return super.state.cart;
+  // }
   setCart(cart: Cart):void {
     this.store.dispatch(cartLoaded(cart));
   }
   async getCart() {
     const response = await this.getCartUseCase.execute();
+    console.log(response);
     this.setCart(response);
-    console.log(this.state);
   }
   setLoading(val: boolean): void {
     this.store.dispatch(loadingCart(val));

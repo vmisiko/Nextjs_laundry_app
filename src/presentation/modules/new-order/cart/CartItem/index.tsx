@@ -3,15 +3,14 @@ import React, { useState } from "react";
 import { ICartItem } from "@/domain/entities/new-order/cart";
 
 const CartItem = ({cartItem, removeItem, addItem, setComment}: {cartItem: ICartItem,  removeItem: ()=> void, addItem: (amount: number)=> void, setComment: (comment: string) => void}) => {
-
 	return (
 		<section className="grid grid-cols-4 mt-10">
 				<div className="col-span-2">
 						<div className="flex">
 						<Image className="rounded-full w-10 h-10" src={require("../../../../../assets/shirt.png")} alt="shirt" ></Image>
 						<div className="flex flex-col ml-2">
-								<span className="font-medium">{cartItem.product.name}</span>
-								<span className="text-sm text-light-text">Ksh {cartItem.product.price}</span>
+								<span className="font-medium">{cartItem?.product?.name || "N/A"}</span>
+								<span className="text-sm text-light-text">Ksh {cartItem.product?.price || "N/A" }</span>
 						</div>
 						</div>
 				</div>

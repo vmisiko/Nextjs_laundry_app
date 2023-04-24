@@ -19,8 +19,7 @@ const productReducer = createSlice({
       state.carts = action.payload;
     },
     addToCart: (state, action) => {
-      const cart = state.carts.add(action.payload, 1);
-      console.log(cart);
+      const cart = state.carts.addCart(action.payload);
       state.carts = cart;
     },
     loadingCart: (state, action) =>{
@@ -41,6 +40,6 @@ const productReducer = createSlice({
 export default productReducer.reducer;
 
 export const { cartLoaded,loadingCart, errorNotif, addToCart } =  productReducer.actions;
-export const selectCart = (state: any) => state.carts; 
+export const selectCartState = (state: any) => state.cart; 
 export const selectError = (state: any) => state.error;
 export const selectLoading = (state: any) => state.loading;
