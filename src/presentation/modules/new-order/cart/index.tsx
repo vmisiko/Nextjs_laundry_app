@@ -15,7 +15,7 @@ const Cart = ({ploc}:{ploc: CartCubit}) => {
     useEffect(() => {
     }, [state]);
     return (
-      <div className="relative h-screen">
+      <div className="relative h-full">
 				<section className="flex mt-5 w-full justify-between">
 				<TextInput
                 name="Search Customer" 
@@ -41,7 +41,7 @@ const Cart = ({ploc}:{ploc: CartCubit}) => {
 						</div>
 				</section>
 
-				<section>
+				<section className="pb-10 mb-14">
 				{	
 					state.carts.cartItems && state.carts.cartItems.map((cartItem: CartItemEntity, index: number) => (
 						<CartItem 
@@ -55,7 +55,7 @@ const Cart = ({ploc}:{ploc: CartCubit}) => {
 				}
 				</section>
 
-				<footer className="absolute w-full bottom-0 offset-y-0">
+				<footer className="absolute w-full bottom-0 offset-y-0 ">
 					<section className="flex justify-between mt-10">
 						<span className="text-sm text-light-text">Sub Total</span>
 						<span> Ksh {state.carts?.totalPrice}</span>
