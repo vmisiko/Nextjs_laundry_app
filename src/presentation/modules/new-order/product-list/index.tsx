@@ -14,7 +14,7 @@ const ProductList = () => {
 	const [categories, setCategories] = useState<Category[]>();
 	const [activeTabID, setActivetTabId] = useState<number>();
     const ploc = dependenciesLocator.provideProductsPloc();
-    const state = useSelector(selectProductState);
+    const state = useBlocState(ploc);
 
 	useEffect(() => {
 		setTime(new Date().toDateString());

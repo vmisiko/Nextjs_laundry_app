@@ -1,5 +1,6 @@
 import { Cart } from "@/domain/entities/new-order/cart";
 import { createSlice } from "@reduxjs/toolkit";
+
 export interface InitialState {
   carts: Cart,
   loading: boolean,

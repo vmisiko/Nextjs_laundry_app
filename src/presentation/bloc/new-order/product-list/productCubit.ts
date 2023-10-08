@@ -15,7 +15,12 @@ class ProductCubit extends Ploc {
   }) {
     super(store);
     this.getProductsUseCase = getProductsUseCase;
+  } 
+
+  public get state(): any {
+    return this.store.getState().product;
   }
+
   setProducts(products: Array<Product>):void {
     this.store.dispatch(loadProducts(products));
   }

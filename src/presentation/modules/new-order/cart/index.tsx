@@ -7,12 +7,14 @@ import { useBlocState } from "@/core/useBlocState";
 import { useSelector } from "react-redux";
 import { selectCartState } from "@/presentation/bloc/new-order/cart/CartSlice";
 import CartCubit from "@/presentation/bloc/new-order/cart/cartCubit";
+import { dependenciesLocator } from "@/core/dependencies";
 
 
 const Cart = ({ploc}:{ploc: CartCubit}) => {
     const [value, setValue] = useState<string>();
-    const state = useSelector(selectCartState);
+    const state = useBlocState(ploc);
     useEffect(() => {
+        console.log(state);
     }, [state]);
     return (
       <div className="relative h-full">
